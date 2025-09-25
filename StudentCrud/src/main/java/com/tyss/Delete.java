@@ -11,17 +11,16 @@ public class Delete {
 		String url = "jdbc:postgresql://localhost:5432/student_app";
 		String username = "postgres";
 		String password = "root";
-		String driver = "org.postgresql.Driver";
 
 		try {
-			Class.forName(driver);
+			Class.forName("org.postgresql.Driver");
 
 			Connection con = DriverManager.getConnection(url, username, password);
 
 			Statement stm = con.createStatement();
 
 			String delete = "DELETE FROM student WHERE sid=4";
-
+			
 			stm.execute(delete);
 
 			con.close();
