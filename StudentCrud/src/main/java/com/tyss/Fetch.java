@@ -23,22 +23,18 @@ public class Fetch {
 
 			String fetch = "SELECT * FROM student";
 
-			int rs = stm.executeUpdate(fetch);
+			ResultSet rs = stm.executeQuery(fetch);
 
-			System.out.println(rs);
+			System.out.println("-------------Students------------");
 
-//			ResultSet rs = stm.executeQuery(fetch);
-//
-//			System.out.println("-------------Students------------");
-//
-//			while (rs.next()) {
-//				System.out.println("Sid   : " + rs.getInt(1));
-//				System.out.println("Name  : " + rs.getString(3));
-//				System.out.println("Email : " + rs.getString(2));
-//				System.out.println("Phone : " + rs.getLong(4));
-//
-//				System.out.println("======================");
-//			}
+			while (rs.next()) {
+				System.out.println("Sid   : " + rs.getInt(1));
+				System.out.println("Name  : " + rs.getString(3));
+				System.out.println("Email : " + rs.getString(2));
+				System.out.println("Phone : " + rs.getLong(4));
+
+				System.out.println("======================");
+			}
 
 			con.close();
 

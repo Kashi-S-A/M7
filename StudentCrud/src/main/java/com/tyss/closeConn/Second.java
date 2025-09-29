@@ -21,8 +21,7 @@ public class Second {
 			e.printStackTrace();
 		}
 
-		try (Connection con = DriverManager.getConnection(url, username, password);)
-		{
+		try (Connection con = DriverManager.getConnection(url, username, password);) {
 			System.out.println("connection created");
 
 			Statement stm = con.createStatement();
