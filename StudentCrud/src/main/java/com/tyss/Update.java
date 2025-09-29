@@ -22,7 +22,9 @@ public class Update {
 
 			String update = "UPDATE student SET name='Tiger Zinda hai' WHERE sid=4";
 
-			stm.execute(update);
+			boolean result = stm.execute(update);
+			
+			System.out.println(result);
 
 			con.close();
 

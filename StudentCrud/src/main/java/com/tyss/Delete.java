@@ -2,6 +2,7 @@ package com.tyss;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -19,9 +20,11 @@ public class Delete {
 
 			Statement stm = con.createStatement();
 
-			String delete = "DELETE FROM student WHERE sid=4";
-			
-			stm.execute(delete);
+			String delete = "DELETE FROM student WHERE name='Tiger'";
+
+			int rs = stm.executeUpdate(delete);
+
+			System.out.println("rows affected : " + rs);
 
 			con.close();
 

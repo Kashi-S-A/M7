@@ -29,7 +29,11 @@ public class Insert {
 			String insert = "INSERT INTO student VALUES(4,'Tiger','tiger@gmail.com',76545678)";
 
 			// step 4 : Execute the query
-			stm.execute(insert);
+
+			int result = stm.executeUpdate(insert);
+
+			System.out.println("row affected : " + result);
+
 			System.out.println("record saved");
 
 			// step 5 : close connection
