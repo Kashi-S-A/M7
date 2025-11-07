@@ -22,12 +22,16 @@ public class Save {
 		// remove() ==> delete
 
 		EntityTransaction et = em.getTransaction();
+		// since all the DML statements are not auto-committing we need manage the
+		// transaction and commit the DML operations
+		// et.begin(); ==> start transaction
+		// et.commit(); ==> commits the transaction.
 
 		Employee employee = new Employee();
-		employee.setEid(102);
-		employee.setName("Tony");
-		employee.setEmail("Tony@gmail.com");
-		employee.setSalary(56000);
+		employee.setEid(103);
+		employee.setName("Smith");
+		employee.setEmail("smith@gmail.com");
+		employee.setSalary(40000);
 
 		et.begin();
 		em.persist(employee);
