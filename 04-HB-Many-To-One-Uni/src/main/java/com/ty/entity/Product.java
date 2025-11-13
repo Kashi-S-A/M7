@@ -1,7 +1,10 @@
 package com.ty.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Product {
@@ -10,6 +13,17 @@ public class Product {
 	private int pid;
 	private String name;
 	private double price;
+
+	@OneToMany(mappedBy = "product")
+	private List<Review> reviews;
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
 
 	public int getPid() {
 		return pid;
