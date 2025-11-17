@@ -16,19 +16,18 @@ public class Save {
 		EntityTransaction et = em.getTransaction();
 
 		Car car = new Car();
-		car.setCid(102);
+		car.setCid(104);
 		car.setBrand("B");
 		car.setPrice(1500000);
 
 		Engine engine = new Engine();
-		engine.setEid(222);
+		engine.setEid(444);
 		engine.setCc(900);
-		
+
 		car.setEngine(engine);
 
 		et.begin();
 		em.persist(car);
-		em.persist(engine);
 		et.commit();
 
 		System.out.println("saved");

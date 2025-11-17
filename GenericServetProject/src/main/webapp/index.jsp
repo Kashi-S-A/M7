@@ -2,7 +2,7 @@
 <body>
 	<h2>User Data</h2>
 	
-	<form action="read">
+	<form action="page-b" method="post">
 		Name : <input type="text" placeholder="enter name" name="username" required><br>
 		Email : <input type="email" placeholder="enter email" name="useremail" required><br>
 		Phone : <input type="number" placeholder="enter phone number" name="userphone" required><br>

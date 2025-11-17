@@ -13,8 +13,8 @@ import javax.servlet.annotation.WebServlet;
 public class PageA extends GenericServlet {
 
 	@Override
-	public void service(ServletRequest req, ServletResponse res) 
-			throws ServletException, IOException {
+	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+
 		System.out.println("PageA servlet is triggered");
 
 		// PrintWriter used to print the message on the browser.
