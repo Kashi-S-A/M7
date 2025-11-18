@@ -13,9 +13,9 @@ public class Save {
 		EntityTransaction et = em.getTransaction();
 
 		User user = new User();
-		user.setName("qwe");
-		user.setEmail("abc@gmail.com");
-		user.setPhone(8765445);
+		user.setName("D");
+		user.setEmail("d@gmail.com");
+		user.setPhone(12345678);
 
 		et.begin();
 		em.persist(user);
