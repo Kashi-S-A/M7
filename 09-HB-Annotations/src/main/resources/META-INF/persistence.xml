@@ -5,7 +5,9 @@
              version="2.1">
 
     <persistence-unit name="dev" transaction-type="RESOURCE_LOCAL">
-
+    
+	<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+	
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/ann" /> <!-- DB Name -->
@@ -17,6 +19,10 @@
             
             <property name="hibernate.show_sql" value="true" /> <!-- Show SQL in console -->
             <property name="hibernate.format_sql" value="true" /> <!-- Show SQL formatted -->
+            
+            <!-- Enable second level cache -->
+            <property name="hibernate.cache.use_second_level_cache" value="true"/>
+            <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.internal.EhcacheRegionFactory"/>
         </properties>
 
     </persistence-unit>

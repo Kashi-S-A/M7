@@ -21,9 +21,19 @@ public class PageA extends HttpServlet {
 		pw.print("<html><body><h1>Welcome to Servlet Page-A</h1></body></html>");
 
 		// to dispatch to servlet
-		//enter url of servlet,for html and
+		// enter url of servlet,for html and
 		// jsp enter name
-		RequestDispatcher rd = req.getRequestDispatcher("login.jsp");//page-b/register.html/login.jsp
+
+		String username = "Allen";
+		int age = 23;
+
+		req.setAttribute("un", username);
+		req.setAttribute("ua", age);
+
+		User user = new User("Smith", "smith@gmail.com", 876545678);
+		req.setAttribute("userDetails", user);
+
+		RequestDispatcher rd = req.getRequestDispatcher("display.jsp");// page-b/register.html/login.jsp
 //		rd.include(req, resp);
 		rd.forward(req, resp);
 	}
