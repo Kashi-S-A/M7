@@ -1,4 +1,4 @@
-package com.ty;
+package com.ty.entity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,14 +11,17 @@ public class Save {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dev");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
-		
-		User user = new User();
-		user.setName("D");
-		user.setEmail("d@gmail.com");
-		user.setPhone(12345678);
+
+		EmployeeId eid = new EmployeeId();
+		eid.setEmail("mangaxyz@gmail.com");
+		eid.setPhone(34567543);
+
+		Employee employee = new Employee();
+		employee.setName("Manga");
+		employee.setEmployeeId(eid);
 
 		et.begin();
-		em.persist(user);
+		em.persist(employee);
 		et.commit();
 
 		System.out.println("saved");
