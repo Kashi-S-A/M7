@@ -18,7 +18,11 @@ public class PageA extends HttpServlet {
 		System.out.println("Servlet Page-A is triggered");
 
 		PrintWriter pw = resp.getWriter();
-		pw.print("<html><body><h1>Welcome to Servlet Page-A</h1></body></html>");
+		pw.print("<html>"
+				+ "<body>"
+				+ "<h1>Welcome to Servlet Page-A</h1>"
+				+ "</body>"
+				+ "</html>");
 
 		// to dispatch to servlet
 		// enter url of servlet,for html and
