@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+
+	<bean id="student" class="com.ty.Student"></bean>
+
+	<bean id="myMobile" class="com.ty.Mobile"></bean>
+
+</beans>
