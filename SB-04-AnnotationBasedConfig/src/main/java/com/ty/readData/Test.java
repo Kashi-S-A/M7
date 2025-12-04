@@ -1,4 +1,4 @@
-package com.ty.list;
+package com.ty.readData;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -8,12 +8,7 @@ public class Test {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext app = new AnnotationConfigApplicationContext(AppConfig.class);
 
-		Student student = app.getBean(Student.class);
-		student.display();
-		
-		System.out.println("------------------------");
-
-		Shop shop = app.getBean(Shop.class);
-		shop.display();
+		DBConnection con = app.getBean(DBConnection.class);
+		con.conCreated();
 	}
 }
