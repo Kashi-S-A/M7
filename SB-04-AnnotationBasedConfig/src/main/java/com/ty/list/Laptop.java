@@ -1,8 +1,8 @@
 package com.ty.list;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 
-@Service
+@Controller
 public class Laptop {
 
 	public void game() {

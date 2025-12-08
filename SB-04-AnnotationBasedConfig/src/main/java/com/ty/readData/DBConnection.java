@@ -8,10 +8,10 @@ public class DBConnection {
 
 	@Value(value = "${url}")
 	private String url;
-	
+
 	@Value(value = "${un}")
 	private String username;
-	
+
 	@Value(value = "${pwd}")
 	private String password;
 
