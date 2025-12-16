@@ -1,58 +1,59 @@
 package com.tyss.ps.controller;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tyss.ps.model.Product;
-import com.tyss.ps.repository.ProductRepository;
+import com.tyss.ps.service.ProductService;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+//API's
 
 @RestController
 @RequestMapping("/pd")
 public class ProductController {
 
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductService productService;
 
 	// saving product
 	@PostMapping("/save")
 	public Product saveProduct(@RequestBody Product product) {
-		Product saved = productRepository.save(product);// saves the object and returns the saved object
+		Product saved = productService.save(product);// saves the object and returns the saved object
 		return saved;
 	}
 
 	// fetch all products
 	@GetMapping
-	public Iterable<Product> fetchAll() {
-		Iterable<Product> all = productRepository.findAll();
-		return all;
+	public List<Product> fetchAll() {
+		List<Product> products = productService.findAll();
+		return products;
 	}
 
 	// fetch By Id
 	@GetMapping("/byId")
 	public Product fetchById(@RequestParam Integer pid) {
-//		Optional<Product> opt = productRepository.findById(pid);
-//
-////		if (opt.isPresent()) {
-////			Product product = opt.get();
-////			return product;
-////		} else {
-////			System.out.println("not found");
-////			return null;
-////		}
-//
-//		Product product = opt.orElseThrow(() -> new RuntimeException("Product not found"));
-//
-//		return product;
+		return productService.getById(pid);
+	}
 
-		return productRepository.findById(pid).orElseThrow(() -> new RuntimeException("Product not found"));
+	@PutMapping("/update/{id}")
+	public Product updateProduct(@PathVariable Integer id, @RequestBody Product product) {
+		return productService.updateProduct(id, product);
+	}
+
+	// Delete a product
+	@DeleteMapping("/delete/{id}")
+	public String deleteProduct(@PathVariable Integer id) {
+		return productService.deleteById(id);
 	}
 
 }
