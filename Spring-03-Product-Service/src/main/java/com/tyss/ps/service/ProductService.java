@@ -3,6 +3,10 @@ package com.tyss.ps.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.tyss.ps.dao.ProductDAO;
@@ -74,5 +78,25 @@ public class ProductService {
 
 	public List<Product> findAll() {
 		return productRepository.findAll();
+	}
+
+	public Page<Product> fetchByPage(Integer pageNumber) {
+		// logic to fetch records based on pageNumber
+
+		Pageable pageable = PageRequest.of(pageNumber - 1, 10);
+
+		Page<Product> all = productRepository.findAll(pageable);
+
+//		List<Product> products = all.toList();
+
+		return all;
+	}
+
+	// Sorting order -> asc,desc
+	public List<Product> sortProducts(String param, String order) {
+		if (order != null && order.equalsIgnoreCase("desc")) {
+			return productRepository.findAll(Sort.by(param).descending());// sort in ascending order by default
+		}
+		return productRepository.findAll(Sort.by(param).ascending());
 	}
 }
