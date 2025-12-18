@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tyss.ps.dto.FilterDTO;
 import com.tyss.ps.model.Product;
 import com.tyss.ps.service.ProductService;
 
@@ -71,5 +72,20 @@ public class ProductController {
 	}
 
 	// Filtering the records
+	@GetMapping("/filter")
+	public List<Product> filterProducts(@RequestBody FilterDTO filterDTO) {
+		List<Product> products = productService.filter(filterDTO);
+		return products;
+	}
+
+	@GetMapping("/range")
+	public List<Product> productByPriceRange(@RequestParam Double fPrice, @RequestParam Double tPrice) {
+		return productService.priceRange(fPrice, tPrice);
+	}
+
+	@GetMapping("/search")
+	public List<Product> searchByName(@RequestParam String name) {
+		return productService.searchByName(name);
+	}
 
 }
