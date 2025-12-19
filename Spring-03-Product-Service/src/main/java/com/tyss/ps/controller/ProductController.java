@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,9 +31,10 @@ public class ProductController {
 
 	// saving product
 	@PostMapping("/save")
-	public Product saveProduct(@RequestBody Product product) {
+	public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
 		Product saved = productService.save(product);// saves the object and returns the saved object
-		return saved;
+		ResponseEntity<Product> resp = new ResponseEntity<Product>(saved, HttpStatus.CREATED);
+		return resp;
 	}
 
 	// fetch all products
@@ -47,13 +51,16 @@ public class ProductController {
 	}
 
 	@PutMapping("/update/{id}")
-	public Product updateProduct(@PathVariable Integer id, @RequestBody Product product) {
-		return productService.updateProduct(id, product);
+	public ResponseEntity<String> updateProduct(@PathVariable Integer id, @RequestBody Product product) {
+		Product updateProduct = productService.updateProduct(id, product);
+		ResponseEntity<String> resp = ResponseEntity.ok()
+				.body("The product with id " + updateProduct.getPid() + " is updated");
+		return resp;
 	}
 
 	// Delete a product
 	@DeleteMapping("/delete/{id}")
-	public String deleteProduct(@PathVariable Integer id) {
+	public ResponseEntity<String> deleteProduct(@PathVariable Integer id) {
 		return productService.deleteById(id);
 	}
 
@@ -86,6 +93,36 @@ public class ProductController {
 	@GetMapping("/search")
 	public List<Product> searchByName(@RequestParam String name) {
 		return productService.searchByName(name);
+	}
+
+	@GetMapping("/exc")
+	public String msg() {
+		
+		String s = null;
+		
+		s.charAt(10);
+
+		int a = 10 / 0;
+
+		return "Hello!!!!!";
+	}
+
+	@ExceptionHandler(ArithmeticException.class)
+	public ResponseEntity<String> handlException(ArithmeticException exception) {
+		System.out.println("handled AE");
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+	}
+	
+	@ExceptionHandler(NullPointerException.class)
+	public ResponseEntity<String> handlNullPointerException(NullPointerException exception) {
+		System.out.println("handled NPE");
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<String> handleException(Exception exception) {
+		System.out.println("handled exception");
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
 	}
 
 }

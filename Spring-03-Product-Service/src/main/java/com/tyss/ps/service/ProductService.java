@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tyss.ps.dao.ProductDAO;
@@ -31,6 +33,9 @@ public class ProductService {
 	}
 
 	public Product getById(Integer pid) {
+		
+		int a = 10/0;
+		
 		return productDAO.getById(pid);
 	}
 
@@ -72,11 +77,20 @@ public class ProductService {
 		return productDAO.save(dbProd);
 	}
 
-	public String deleteById(Integer id) {
+	public ResponseEntity<String> deleteById(Integer id) {
 		Product dbProd = productDAO.getById(id);
 		productDAO.delete(dbProd);
 //		productRepository.deleteById(id);
-		return "Deleted";
+		return ResponseEntity.status(HttpStatus.OK).body("the product with id " + dbProd.getPid() + " is Deleted");
+	}
+
+	public ResponseEntity<?> test() {
+		int n = 2;
+		if (n % 2 == 0) {
+			return new ResponseEntity<Integer>(n, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>("Odd", HttpStatus.OK);
+		}
 	}
 
 	public List<Product> findAll() {
@@ -116,11 +130,11 @@ public class ProductService {
 
 		return products;
 	}
-	
-	public List<Product> priceRange(Double fPrice,Double tPrice) {
+
+	public List<Product> priceRange(Double fPrice, Double tPrice) {
 		return productRepository.getProductsPriceRange(fPrice, tPrice);
 	}
-	
+
 	public List<Product> searchByName(String name) {
 		return productRepository.findByNameContainingIgnoreCase(name);
 	}
