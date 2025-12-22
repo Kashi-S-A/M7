@@ -33,9 +33,9 @@ public class ProductService {
 	}
 
 	public Product getById(Integer pid) {
-		
-		int a = 10/0;
-		
+
+		int a = 10 / 0;
+
 		return productDAO.getById(pid);
 	}
 

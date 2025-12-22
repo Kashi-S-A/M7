@@ -10,85 +10,41 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 @Entity
 @Table(name = "products")
+//@Getter
+//@Setter
+//@ToString
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@EqualsAndHashCode
+@Data
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer pid;
-	private String name;
-	private Double price;
-	private String description;
-	private String color;
 
+	@Size(min = 3, max = 30, message = "the name of the product should contain min 3 chars and max 30 chars")
+	private String name;
+
+	@Positive(message = "price should a +ve number")
+	private Double price;
+
+	private String description;
+
+	@NotNull(message = "color cannot be empty")
+	private String color;
+	
 	@CreationTimestamp
 	private LocalDate createdDate;
 
 	@UpdateTimestamp
 	private LocalDate lastUpdatedDate;
-
-	public LocalDate getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(LocalDate createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public LocalDate getLastUpdatedDate() {
-		return lastUpdatedDate;
-	}
-
-	public void setLastUpdatedDate(LocalDate lastUpdatedDate) {
-		this.lastUpdatedDate = lastUpdatedDate;
-	}
-
-	@Override
-	public String toString() {
-		return "Product [pid=" + pid + ", name=" + name + ", price=" + price + ", description=" + description
-				+ ", color=" + color + "]";
-	}
-
-	public Integer getPid() {
-		return pid;
-	}
-
-	public void setPid(Integer pid) {
-		this.pid = pid;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
 
 }

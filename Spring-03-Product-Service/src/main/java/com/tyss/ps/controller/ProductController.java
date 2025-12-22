@@ -21,6 +21,8 @@ import com.tyss.ps.dto.FilterDTO;
 import com.tyss.ps.model.Product;
 import com.tyss.ps.service.ProductService;
 
+import jakarta.validation.Valid;
+
 //API's
 @RestController
 @RequestMapping("/pd")
@@ -31,7 +33,7 @@ public class ProductController {
 
 	// saving product
 	@PostMapping("/save")
-	public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
+	public ResponseEntity<Product> saveProduct(@Valid @RequestBody Product product) {
 		Product saved = productService.save(product);// saves the object and returns the saved object
 		ResponseEntity<Product> resp = new ResponseEntity<Product>(saved, HttpStatus.CREATED);
 		return resp;
@@ -80,7 +82,7 @@ public class ProductController {
 
 	// Filtering the records
 	@GetMapping("/filter")
-	public List<Product> filterProducts(@RequestBody FilterDTO filterDTO) {
+	public List<Product> filterProducts(@Valid @RequestBody FilterDTO filterDTO) {
 		List<Product> products = productService.filter(filterDTO);
 		return products;
 	}
@@ -97,10 +99,10 @@ public class ProductController {
 
 	@GetMapping("/exc")
 	public String msg() {
-		
-		String s = null;
-		
-		s.charAt(10);
+
+//		String s = null;
+//		
+//		s.charAt(10);
 
 		int a = 10 / 0;
 
@@ -112,13 +114,13 @@ public class ProductController {
 		System.out.println("handled AE");
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
 	}
-	
+
 	@ExceptionHandler(NullPointerException.class)
 	public ResponseEntity<String> handlNullPointerException(NullPointerException exception) {
 		System.out.println("handled NPE");
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
 	}
-	
+
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> handleException(Exception exception) {
 		System.out.println("handled exception");
