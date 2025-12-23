@@ -30,7 +30,7 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer pid;
 
-	@Size(min = 3, max = 30, message = "the name of the product should contain min 3 chars and max 30 chars")
+	@Size(min = 3, message = "the name of the product should contain min 3 chars and max 30 chars")
 	private String name;
 
 	@Positive(message = "price should a +ve number")
