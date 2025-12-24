@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome Email</title>
+</head>
+
+<body style="margin:0; padding:0; background-color:#f4f6f8;
+             font-family:Arial, Helvetica, sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0"
+       style="background-color:#f4f6f8; padding:20px;">
+    <tr>
+        <td align="center">
+
+            <!-- Main Container -->
+            <table width="600" cellpadding="0" cellspacing="0"
+                   style="background-color:#ffffff; border-radius:8px;
+                   box-shadow:0 2px 8px rgba(0,0,0,0.08); overflow:hidden;">
+
+                <!-- Header -->
+                <tr>
+                    <td style="background-color:#4f46e5; padding:20px; text-align:center;">
+                        <h1 style="color:#ffffff; margin:0; font-size:26px;">
+                            Welcome to Our Platform 🎉
+                        </h1>
+                    </td>
+                </tr>
+
+                <!-- Body -->
+                <tr>
+                    <td style="padding:30px; color:#333333; line-height:1.6;">
+                        <p style="font-size:16px; margin-top:0;">
+                            Hi <strong th:text="${username}">User</strong>,
+                        </p>
+
+                        <p style="font-size:15px;">
+                            We’re happy to let you know that your registration was successful.
+                            Your account has been created, and you’re now part of our community.
+                        </p>
+
+                        <p style="font-size:15px;">
+                            You can log in anytime using your registered email and password.
+                        </p>
+
+                        <p style="font-size:15px;">
+                            If you did not create this account, please contact our support team.
+                        </p>
+
+                        <p style="margin-top:25px; font-size:14px; color:#555555;">
+                            Warm regards,<br>
+                            <strong>Team YourApp</strong>
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                    <td style="background-color:#f1f5f9; padding:15px; text-align:center;
+                               font-size:12px; color:#777777;">
+                        © 2025 YourApp. All rights reserved.<br>
+                        This is an automated message. Please do not reply.
+                    </td>
+                </tr>
+
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
