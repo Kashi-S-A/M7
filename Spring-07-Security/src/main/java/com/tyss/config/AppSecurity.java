@@ -14,15 +14,16 @@ public class AppSecurity {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) {
-		
+		System.out.println("done");
 		 http.csrf(c -> c.disable())
 		 		.authorizeHttpRequests(req -> req
 		 				.requestMatchers("/register")
 		 				.permitAll()
+		 				.requestMatchers("/msg")
+		 				.hasRole("ADMIN")
 		 				.anyRequest()
 		 				.authenticated()
-		 		).formLogin(f -> f.successForwardUrl("/greet"))//POST
-		 		;
+		 		).formLogin(f -> f.successForwardUrl("/greet"));//POST
 		 		
 		return http.build();
 	}
