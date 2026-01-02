@@ -16,6 +16,7 @@ import com.tyss.dto.LoginDTO;
 import com.tyss.dto.RegisterDTO;
 import com.tyss.model.Customer;
 import com.tyss.repo.CustomerRepo;
+import com.tyss.service.JwtService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,8 +33,11 @@ public class CustomerController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	@Autowired
+	private JwtService jwtService;
+
 	@PostMapping("/register")
-	public ResponseEntity<String> postMethodName(@RequestBody RegisterDTO register) {
+	public ResponseEntity<String> register(@RequestBody RegisterDTO register) {
 		Optional<Customer> opt = customerRepo.findByEmail(register.getEmail());
 
 		if (opt.isPresent()) {
@@ -56,16 +60,19 @@ public class CustomerController {
 			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginDTO.getEmail(),
 					loginDTO.getPassword());
 			Authentication authenticate = authenticationManager.authenticate(token);
-			if (authenticate.isAuthenticated()) 
-				return ResponseEntity.status(HttpStatus.OK).body("Logged In Successful");
+			if (authenticate.isAuthenticated()) {
+				// Generate JWT and Send it back to the client
+				String jwtToken = jwtService.generateToken(loginDTO.getEmail());
+				return ResponseEntity.status(HttpStatus.OK).body("Logged In Successful, Token :" + jwtToken);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Credentials");
 	}
 
-	@GetMapping("/greet")
-	public String greetAPI() {
+	@GetMapping("/home")
+	public String homePage() {
 		return "Hey Good Morning!!!!!!!!!!!!!";
 	}
 
